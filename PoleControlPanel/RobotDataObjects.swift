@@ -97,19 +97,21 @@ struct MotorControl {
     
     let speed: UInt16
     let direction: MotorDirection
+    let autostop: Bool
     let writeKey: UInt16
     
-    init(speed: UInt16, direction: MotorDirection, writeKey key: UInt16) throws {
+    init(speed: UInt16, autostop: Bool, direction: MotorDirection, writeKey key: UInt16) throws {
         guard speed <= 0x00FF else { throw BluetoothDataError.speedOutOfRange }
         if direction == .stopped && speed > 0 { throw BluetoothDataError.invalidDirection }
         if direction != .stopped && speed == 0 { throw BluetoothDataError.invalidDirection }
         self.speed = speed
         self.direction = direction
         self.writeKey = key
+        self.autostop = autostop
     }
     
     init(rawData data: Data) throws {
-        guard data.count == 4 else { throw BluetoothDataError.badBytecount(4, data.count) }
+        guard data.count == 5 else { throw BluetoothDataError.badBytecount(4, data.count) }
         self.writeKey = 0x0000
         var dataBytes = [UInt8](data)
         
@@ -125,6 +127,7 @@ struct MotorControl {
                 direction = .down
             }
         }
+        autostop = (dataBytes[4] & 0x01 == 0x01)
     }
     
     var writeData: Data {
@@ -138,6 +141,7 @@ struct MotorControl {
         let highSpeedByte = UInt8(truncatingBitPattern: speed >> 8)
         dataBytes.append(lowSpeedByte)
         dataBytes.append(highSpeedByte)
+        dataBytes.append(autostop ? 0x01 : 0x00)
         
         return Data(bytes: dataBytes)
     }

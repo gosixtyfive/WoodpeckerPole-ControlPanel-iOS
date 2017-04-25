@@ -108,7 +108,7 @@ class ControlPanelViewManager {
     
     // Turn on down motor and wait for limit switch to deactivate
     func autoLowerToBottom() {
-        setMotorControl(speed: 0x0080, autostop: false, direction: .down, userOperationDescription: "Motor Down to Bottom")
+        setMotorControl(speed: 0x80, autostop: false, direction: .down, userOperationDescription: "Motor Down to Bottom")
     }
     
     //MARK: - Emergency stop
@@ -121,8 +121,7 @@ class ControlPanelViewManager {
     
     private func setMotorControl(speed: UInt16, autostop: Bool, direction: MotorControl.MotorDirection, userOperationDescription: String) {
         do {
-            let speedWithAutoStop = (speed & 0xFFFE) | (autostop ? 0x0001 : 0x0000)
-            let motorControlSetting = try MotorControl(speed: speedWithAutoStop, direction: direction, writeKey: RobotDevice.Security.writeKey)
+            let motorControlSetting = try MotorControl(speed: speed, autostop: autostop, direction: direction, writeKey: RobotDevice.Security.writeKey)
             robotControllerModel.setMotorControlSetting(data: motorControlSetting.writeData, confirmWrite: true, completion: { result in
                 switch result {
                 case .success(_):

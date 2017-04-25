@@ -168,34 +168,37 @@ class DataObjectTests: XCTestCase {
         }
         
         do {
-            let testMotor = try MotorControl(rawData: Data(bytes: [0x00, 0x00, 0xFF, 0xFF]))
+            let testMotor = try MotorControl(rawData: Data(bytes: [0x00, 0x00, 0xFF, 0xFF, 0x01]))
             XCTAssertEqual(testMotor.direction, .down)
             XCTAssertEqual(testMotor.speed, 1)
+            XCTAssert(testMotor.autostop == true, "Autostop not set")
         } catch {
             XCTFail("Failed init - Motor")
             
         }
         
         do {
-            let testMotor = try MotorControl(rawData: Data(bytes: [0x00, 0x00, 0x00, 0x00]))
+            let testMotor = try MotorControl(rawData: Data(bytes: [0x00, 0x00, 0x00, 0x00, 0x00]))
             XCTAssertEqual(testMotor.direction, .stopped)
             XCTAssertEqual(testMotor.speed, 0)
+            XCTAssert(testMotor.autostop == false, "Autostop incorrectly set")
         } catch {
             XCTFail("Failed init - Motor")
             
         }
         
         do {
-            let testMotor = try MotorControl(rawData: Data(bytes: [0x00, 0x00, 0x2F, 0x00]))
+            let testMotor = try MotorControl(rawData: Data(bytes: [0x00, 0x00, 0x2F, 0x00, 0x00]))
             XCTAssertEqual(testMotor.direction, .up)
             XCTAssertEqual(testMotor.speed, 0x2F)
+            XCTAssert(testMotor.autostop == false, "Autostop incorrectly set")
         } catch {
             XCTFail("Failed init - Motor")
             
         }
         
         do {
-            let testMotor = try MotorControl(speed: 0x00A5, direction: .down, writeKey: 0xF001)
+            let testMotor = try MotorControl(speed: 0x00A5, autostop: true, direction: .down, writeKey: 0xF001)
             let motorControlWriteData = testMotor.writeData
             let bytes = [UInt8](motorControlWriteData)
             
@@ -203,13 +206,14 @@ class DataObjectTests: XCTestCase {
             XCTAssertEqual(bytes[1], 0xF0, "High byte key incorrect")
             XCTAssertEqual(bytes[2], 0x5B, "Motor Speed and Position Incorrect")
             XCTAssertEqual(bytes[3], 0xFF, "Motor Speed and Position Incorrect")
+            XCTAssertEqual(bytes[4], 0x01, "Autostop should be selected")
   
         } catch {
             XCTFail("Failed init - Motor")
         }
         
         do {
-            let testMotor = try MotorControl(speed: 0x0028, direction: .up, writeKey: 0xF001)
+            let testMotor = try MotorControl(speed: 0x0028, autostop: false, direction: .up, writeKey: 0xF001)
             let motorControlWriteData = testMotor.writeData
             let bytes = [UInt8](motorControlWriteData)
             
@@ -217,6 +221,7 @@ class DataObjectTests: XCTestCase {
             XCTAssertEqual(bytes[1], 0xF0, "High byte key incorrect")
             XCTAssertEqual(bytes[2], 0x28, "Motor Speed and Position Incorrect")
             XCTAssertEqual(bytes[3], 0x00, "Motor Speed and Position Incorrect")
+            XCTAssertEqual(bytes[4], 0x00, "Autostop should not be selected")
 
         } catch {
             XCTFail("Failed init - Motor")
@@ -224,7 +229,7 @@ class DataObjectTests: XCTestCase {
         
         
         do {
-            let testMotor = try MotorControl(speed: 0x00, direction: .stopped, writeKey: 0xF001)
+            let testMotor = try MotorControl(speed: 0x00, autostop: false, direction: .stopped, writeKey: 0xF001)
             let motorControlWriteData = testMotor.writeData
             let bytes = [UInt8](motorControlWriteData)
             
@@ -232,6 +237,7 @@ class DataObjectTests: XCTestCase {
             XCTAssertEqual(bytes[1], 0xF0, "High byte key incorrect")
             XCTAssertEqual(bytes[2], 0x00, "Motor Speed and Position Incorrect")
             XCTAssertEqual(bytes[3], 0x00, "Motor Speed and Position Incorrect")
+            XCTAssertEqual(bytes[4], 0x00, "Autostop should not be selected")
 
         } catch {
             XCTFail("Failed init - Motor")
