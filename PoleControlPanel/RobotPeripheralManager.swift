@@ -81,10 +81,6 @@ extension RobotPeripheralManager : CBPeripheralDelegate {
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
-        
-    }
-    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard let discoveredCharacteristics = service.characteristics else { return }
         for characteristic in discoveredCharacteristics {
@@ -108,10 +104,6 @@ extension RobotPeripheralManager : CBPeripheralDelegate {
             }
         }
         processNextWriteCommand() // Just keep processing
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
-        
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
