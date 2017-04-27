@@ -109,7 +109,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="autoRaiseButtonTapped:" destination="J1k-9q-8Ad" eventType="touchUpInside" id="ffG-KX-AoL"/>
+                                    <action selector="autoRaiseButtonTapped:" destination="J1k-9q-8Ad" eventType="touchDown" id="ZjC-28-knJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnG-zx-B6U">
@@ -149,7 +149,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="autoLowerButtonTapped:" destination="J1k-9q-8Ad" eventType="touchUpInside" id="2PS-zq-VOk"/>
+                                    <action selector="autoLowerButtonTapped:" destination="J1k-9q-8Ad" eventType="touchDown" id="rwR-0h-FLf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PsC-cz-wTM">
@@ -161,7 +161,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="releaseBirdButtonTapped:" destination="J1k-9q-8Ad" eventType="touchUpInside" id="sqZ-MM-DgS"/>
+                                    <action selector="releaseBirdButtonTapped:" destination="J1k-9q-8Ad" eventType="touchDown" id="U0C-ER-ufT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZjQ-El-Wvf">
@@ -173,7 +173,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="launchBirdButtonTapped:" destination="J1k-9q-8Ad" eventType="touchUpInside" id="9TI-5f-P2Y"/>
+                                    <action selector="launchBirdButtonTapped:" destination="J1k-9q-8Ad" eventType="touchDown" id="x9Q-Vg-iMf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKz-hR-bSd">
@@ -359,13 +359,13 @@
                                                 <rect key="frame" x="0.0" y="50" width="290" height="24"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCU-W7-rOK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="258" height="24"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Yes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4PM-UT-ebC">
-                                                        <rect key="frame" x="258" y="0.0" width="32" height="24"/>
+                                                        <rect key="frame" x="103.5" y="0.0" width="186.5" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
