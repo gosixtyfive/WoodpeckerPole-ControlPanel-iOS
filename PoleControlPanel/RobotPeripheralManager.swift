@@ -66,6 +66,7 @@ class RobotPeripheralManager : NSObject {
         self.peripheral = peripheral
         super.init()
         peripheral.delegate = self
+        peripheral.discoverServices(nil)
     }
 }
 

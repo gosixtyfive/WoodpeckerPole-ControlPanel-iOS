@@ -66,8 +66,7 @@ class RobotControllerModel {
             switch result {
             case .success(let peripheral):
                 self.connectedPeripheral = peripheral
-                self.connectedPeripheralManager = RobotPeripheralManager(peripheral: self.connectedPeripheral!)
-                self.connectedPeripheral!.discoverServices(nil)
+                self.connectedPeripheralManager = RobotPeripheralManager(peripheral: peripheral)
                 NotificationCenter.default.post(name: robotConnectedNotification, object: nil)
             case .failure:
                 break
