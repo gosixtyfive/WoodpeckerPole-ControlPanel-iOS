@@ -40,40 +40,27 @@ class ControlPanelViewManager {
         
     }
     
-    //MARK: - Auto release and launch
-    
-    func releaseAndLaunchBird() {
-        setLatchPosition(position: 0, userOperationDescription: "Start Full High Speed Unlatch")
-        setLauncherPosition(position: 180, userOperationDescription: "Start Full Speed Launch")
-    }
-    
-    //MARK: - Manual Latch Control
-    
-    func latchBird() {
-        setLatchPosition(position: 180, userOperationDescription: "Start Slow Latching")
-    }
-    
-    //MARK: - Auto bird release
-    
-    func releaseBird() {
-        setLatchPosition(position: 0, userOperationDescription: "Start Full High Speed Unlatch")
-    }
-    
-    //MARK: - Manual Launch Control
-    
-    func retractLauncher() {
-        setLauncherPosition(position: 0, userOperationDescription: "Start Slow Retract of Launcher")
-    }
+    //MARK: - Combined Latch and Launch
     
     func launchBird() {
-        setLauncherPosition(position: 130, userOperationDescription: "Start Full Speed Launch")
+        setLatchPosition(position: 95, userOperationDescription: "Slight Release for Bounce")
+        setLatchPosition(position: 175, userOperationDescription: "Full Speed Flip up Launch")
     }
     
+    func liftBirdPosition() {
+        setLatchPosition(position: 105, userOperationDescription: "Start Full Speed Launch")
+    }
+    
+    func retrieveBirdPosition() {
+        setLatchPosition(position: 90, userOperationDescription: "Start Full Speed Launch")
+    }
+
+  
     //MARK: - Lifting Mechanism
     
     // Turn on up motor and wait for limit switch to deactivate
     func autoRaiseToTop() {
-        setMotorControl(speed: 0x80, autostop: false, direction: .up, userOperationDescription: "Motor Up to Top")
+        setMotorControl(speed: 0x90, autostop: false, direction: .up, userOperationDescription: "Motor Up to Top")
     }
     
     func upButtonChangedState() {
@@ -95,7 +82,7 @@ class ControlPanelViewManager {
     }
     
     func startMotorUp() {
-        setMotorControl(speed: 0x80, autostop: true, direction: .up, userOperationDescription: "Motor Up")
+        setMotorControl(speed: 0x90, autostop: true, direction: .up, userOperationDescription: "Motor Up")
     }
     
     func startMotorDown() {
