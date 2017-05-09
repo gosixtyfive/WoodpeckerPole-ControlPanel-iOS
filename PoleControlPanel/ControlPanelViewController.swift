@@ -50,10 +50,6 @@ class ControlPanelViewController: UIViewController {
         controlPanelManager.launchBird()
     }
     
-    @IBAction func liftBirdPositionButtonTapped(_ sender: UIButton) {
-        controlPanelManager.liftBirdPosition()
-    }
-    
     @IBAction func retrieveBirdPositionButtonTapped(_ sender: UIButton) {
         controlPanelManager.retrieveBirdPosition()
     }
