@@ -18,16 +18,21 @@ enum BluetoothDataError : Error {
 
 struct Battery {
     static let vRef = 3.3
-    static let vDivider = 0.5
+    static let vDividerProcessorVolts = 0.5
+    static let vDividerMotorVolts = 0.483
     static let adcBitsResolution = 10.0
     
     let volts: Double
+    let motorVolts: Double
     
     init(rawData data: Data) throws {
-        guard data.count == 2 else { throw BluetoothDataError.badBytecount(2, data.count) }
+        guard data.count == 4 else { throw BluetoothDataError.badBytecount(4, data.count) }
         let dataBytes = [UInt8](data)
-        let rawValue = UInt16(dataBytes[0]) | UInt16(dataBytes[1]) << 8
-        self.volts = Battery.vRef * Double(rawValue) / (pow(2, Battery.adcBitsResolution) - 1) * (1.0 / Battery.vDivider)
+        let rawValueVolts = UInt16(dataBytes[0]) | UInt16(dataBytes[1]) << 8
+        self.volts = Battery.vRef * Double(rawValueVolts) / (pow(2, Battery.adcBitsResolution) - 1) * (1.0 / Battery.vDividerProcessorVolts)
+        
+        let rawValueMotorVolts = UInt16(dataBytes[2]) | UInt16(dataBytes[3]) << 8
+        self.motorVolts = Battery.vRef * Double(rawValueMotorVolts) / (pow(2, Battery.adcBitsResolution) - 1) * (1.0 / Battery.vDividerMotorVolts)
     }
 }
 

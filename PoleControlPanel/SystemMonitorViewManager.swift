@@ -79,7 +79,6 @@ class SystemMonitorViewManager {
                 if let rssi = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSNumber {
                     self.managedView?.updateRssiLabel(value: rssi.stringValue)
                     self.managedView?.showRSSI(true)
-                    print(rssi)
                 } else {
                     self.managedView?.showRSSI(false)
                 }
@@ -87,6 +86,20 @@ class SystemMonitorViewManager {
                 self.managedView?.showRSSI(false)
                 print(error)
             }
+        }
+        robotControllerModel.getBatteryVoltage{ result in
+            switch result {
+            case .success(let battery):
+                let processorVoltage = battery.volts
+                let motorVoltage = battery.motorVolts
+                self.managedView?.showProcessorVoltage(true)
+                self.managedView?.updateBatteryVoltage(processor: String(format: "%3.2f V", processorVoltage), motors: String(format: "%3.2f V", motorVoltage))
+            case .failure(let error):
+                self.managedView?.showProcessorVoltage(true)
+                self.managedView?.updateBatteryVoltage(processor: "ERR", motors: "ERR")
+                print(error)
+            }
+        
         }
     }
 }

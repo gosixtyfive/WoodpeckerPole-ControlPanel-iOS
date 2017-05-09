@@ -45,8 +45,10 @@ class RobotPeripheralManager : NSObject {
                                             RobotDevice.ControlService.CharacteristicIdentifiers.launcherPosition,
                                             RobotDevice.ControlService.CharacteristicIdentifiers.batteryVoltage]
     
-    let characteristicsToNotify = [RobotDevice.ControlService.CharacteristicIdentifiers.robotPosition,
-                                   RobotDevice.ControlService.CharacteristicIdentifiers.batteryVoltage]
+    let characteristicsToNotify = [CBUUID]()
+    
+//    let characteristicsToNotify = [RobotDevice.ControlService.CharacteristicIdentifiers.robotPosition,
+//                                   RobotDevice.ControlService.CharacteristicIdentifiers.batteryVoltage]
     
     let peripheral: CBPeripheral
     

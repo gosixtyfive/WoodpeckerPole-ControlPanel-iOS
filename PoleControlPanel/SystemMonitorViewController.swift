@@ -28,6 +28,9 @@ class SystemMonitorViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var batteryLevelStackView: UIStackView!
     @IBOutlet weak var batteryValueLabel: UILabel!
     
+    @IBOutlet weak var motorBatteryStackView: UIStackView!
+    @IBOutlet weak var motorBatteryValueLabel: UILabel!
+    
     @IBOutlet weak var rssiLevelStackView: UIStackView!
     @IBOutlet weak var rssiValueLabel: UILabel!
     
@@ -79,6 +82,7 @@ class SystemMonitorViewController: UIViewController, UITableViewDelegate, UITabl
         activityIndicatorStackView.isHidden = true
         
         batteryLevelStackView.isHidden = true
+        motorBatteryStackView.isHidden = true 
         rssiLevelStackView.isHidden = true 
         liftCountStackView.isHidden = true
         
@@ -120,6 +124,8 @@ class SystemMonitorViewController: UIViewController, UITableViewDelegate, UITabl
             self.deviceIdentifierValueLabel.isHidden = true
             self.rssiLevelStackView.isHidden = true
             self.scanForDevicesButton.isHidden = false
+            self.batteryLevelStackView.isHidden = true
+            self.motorBatteryStackView.isHidden = true
         }
     }
     
@@ -129,6 +135,20 @@ class SystemMonitorViewController: UIViewController, UITableViewDelegate, UITabl
                 self.rssiLevelStackView.isHidden = !show
             }
         }
+    }
+    
+    func showProcessorVoltage(_ show: Bool) {
+        UIView.animate(withDuration: 0.35) {
+            if !(self.batteryLevelStackView.isHidden == !show) {
+                self.batteryLevelStackView.isHidden = !show
+                self.motorBatteryStackView.isHidden = !show
+            }
+        }
+    }
+    
+    func updateBatteryVoltage(processor: String, motors: String) {
+        batteryValueLabel.text = processor
+        motorBatteryValueLabel.text = motors
     }
     
     func updateRssiLabel(value: String) {
