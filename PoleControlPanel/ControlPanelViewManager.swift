@@ -43,11 +43,17 @@ class ControlPanelViewManager {
     //MARK: - Combined Latch and Launch
     
     func launchBird() {
-        setLatchPosition(position: 175, userOperationDescription: "Full Speed Flip up Launch")
+        startMotorUp()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(250)) {
+            self.setLatchPosition(position: 175, userOperationDescription: "Full Speed Flip up Launch")
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(400)) {
+                self.stopMotor()
+            }
+        }
     }
     
     func retrieveBirdPosition() {
-        setLatchPosition(position: 77, userOperationDescription: "Start Full Speed Launch")
+        setLatchPosition(position: 75, userOperationDescription: "Position for lifting")
     }
 
   
