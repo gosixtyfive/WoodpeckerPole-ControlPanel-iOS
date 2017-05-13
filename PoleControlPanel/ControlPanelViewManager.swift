@@ -45,7 +45,7 @@ class ControlPanelViewManager {
     func launchBird() {
         startMotorUp()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(250)) {
-            self.setLatchPosition(position: 175, userOperationDescription: "Full Speed Flip up Launch")
+            self.setLatchPosition(position: 3, userOperationDescription: "Full Speed Flip up Launch")
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(400)) {
                 self.stopMotor()
             }
@@ -53,7 +53,7 @@ class ControlPanelViewManager {
     }
     
     func retrieveBirdPosition() {
-        setLatchPosition(position: 75, userOperationDescription: "Position for lifting")
+        setLatchPosition(position: 105, userOperationDescription: "Position for lifting")
     }
 
   
