@@ -110,7 +110,7 @@ class CentralManagerWrapper : NSObject, CBCentralManagerDelegate {
                 centralManager.scanForPeripherals(withServices: serviceIdentifiers, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
             case .connect(let peripheral, _):
                 print("\(Date()) - Connect Started")
-                commandTimeout = 10.0
+                commandTimeout = 30.0
                 commandTimer = Timer.scheduledTimer(timeInterval: commandTimeout, target: self, selector: #selector(CentralManagerWrapper.commandTimeoutOccurred), userInfo: nil, repeats: false)
                 centralManager.connect(peripheral, options: nil)
             case .disconnect(let peripheral, _):
