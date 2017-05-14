@@ -50,7 +50,6 @@ class SystemMonitorViewManager {
     
     func selectDeviceForConnection(atIndex index: Int) {
         robotControllerModel.connect(toPeripheral: discoveredPeripherals[index]) { result in
-            self.discoveredPeripherals = []
             switch result {
             case .success(let peripheral):
                 self.managedView?.connectSucceeded(deviceName: peripheral.name, deviceIdentifier: peripheral.identifier.uuidString)
@@ -60,6 +59,7 @@ class SystemMonitorViewManager {
                 self.managedView?.connectFailed()
                 print("Connect peripheral error: \(error) for \(String(describing: self.discoveredPeripherals[index]))")
             }
+            self.discoveredPeripherals = []
         }
     }
     
