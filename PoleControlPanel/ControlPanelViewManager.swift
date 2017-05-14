@@ -46,7 +46,7 @@ class ControlPanelViewManager {
         startMotorUp()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(250)) {
             self.setLatchPosition(position: 3, userOperationDescription: "Full Speed Flip up Launch")
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(400)) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(1000)) {
                 self.stopMotor()
             }
         }
